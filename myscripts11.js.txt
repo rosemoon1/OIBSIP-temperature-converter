@@ -1,0 +1,32 @@
+function convertTemperature() {
+  const temperatureInput = document.getElementById("temperature");
+  const unitSelect = document.getElementById("unit");
+  const resultDiv = document.getElementById("result");
+  
+  const temperature = temperatureInput.value;
+  if (!isNumeric(temperature)) {
+    resultDiv.innerText = "Invalid input. Please enter a valid number.";
+    return;
+  }
+
+  const fromUnit = unitSelect.value;
+  let convertedTemp = 0;
+  let toUnit = "";
+
+  if (fromUnit === "celsius") {
+    toUnit = "Fahrenheit";
+    convertedTemp = (temperature * 9/5) + 32;
+  } else if (fromUnit === "fahrenheit") {
+    toUnit = "Celsius";
+    convertedTemp = (temperature - 32) * 5/9;
+  } else if (fromUnit === "kelvin") {
+    toUnit = "Celsius";
+    convertedTemp = temperature - 273.15;
+  }
+
+  resultDiv.innerText = `The converted temperature is ${convertedTemp.toFixed(2)} ${toUnit}.`;
+}
+
+function isNumeric(value) {
+  return /^-?\d+\.?\d*$/.test(value);
+}
